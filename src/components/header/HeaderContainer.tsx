@@ -1,6 +1,7 @@
 import { styled } from 'styled-components'
 import { Saira_Stencil_One } from 'next/font/google'
 import { SearchInput } from './SearchInput'
+import { Cart } from './Cart'
 
 const saira_Stencil_One = Saira_Stencil_One({
   subsets: ['latin'],
@@ -26,7 +27,7 @@ export function Header() {
     <HeaderContainer>
       <Logo className={saira_Stencil_One.className}>LOGO</Logo>
       <SearchInput />
-      <div>CART</div>
+      <Cart />
     </HeaderContainer>
   )
 }
