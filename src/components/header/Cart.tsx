@@ -6,15 +6,36 @@ const CartContainer = styled.div``
 
 export function Cart() {
   const { value, updateLocalStorage } = UseLocalStorage('cart-products')
-  
-  const handleCart = () => updateLocalStorage("3")
-  
+
+  const handleCart = () => updateLocalStorage('3')
+
+
+  const CountContainer = styled.div`
+    position: relative;
+  `
+
+  const CartCount = styled.span`
+    position: absolute;
+    top: 40%;
+    right: -1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--red-color);
+    color: #fff;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;    
+    font-size: .8rem;
+  `
+
   console.log(value)
   return (
     <CartContainer>
-      <CartIcon />
-      <button onClick={handleCart}>test</button>
-      <span>{value ?? 3}</span>
+      <CountContainer>
+        <CartIcon />
+        {value.length && <CartCount>{value.length}</CartCount>}
+      </CountContainer>
     </CartContainer>
   )
 }
