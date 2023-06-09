@@ -1,6 +1,6 @@
 'use client'
 
-import { Header } from '@/components/header/HeaderContainer'
+import { HeaderContainer } from '@/components/header/HeaderContainer'
 import './globals.css'
 import { Saira } from 'next/font/google'
 
@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="pt-Br">
       <body className={saira.className}>
-        <Header />
+        <HeaderContainer />
         {children}
         </body>
     </html>

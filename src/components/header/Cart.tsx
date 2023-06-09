@@ -9,7 +9,6 @@ export function Cart() {
 
   const handleCart = () => updateLocalStorage('3')
 
-
   const CountContainer = styled.div`
     position: relative;
   `
