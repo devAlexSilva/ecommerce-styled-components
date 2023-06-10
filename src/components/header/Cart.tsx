@@ -4,16 +4,11 @@ import { styled } from "styled-components"
 
 const CartContainer = styled.div``
 
-export function Cart() {
-  const { value, updateLocalStorage } = UseLocalStorage('cart-products')
-
-  const handleCart = () => updateLocalStorage('3')
-
-  const CountContainer = styled.div`
+const CountContainer = styled.div`
     position: relative;
   `
 
-  const CartCount = styled.span`
+const CartCount = styled.span`
     position: absolute;
     top: 40%;
     right: -1rem;
@@ -27,6 +22,12 @@ export function Cart() {
     border-radius: 50%;    
     font-size: .8rem;
   `
+
+export function Cart() {
+  const { value, updateLocalStorage } = UseLocalStorage('cart-products')
+
+  const handleCart = () => updateLocalStorage('3')
+
 
   console.log(value)
   return (
