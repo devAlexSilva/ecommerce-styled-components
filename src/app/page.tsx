@@ -1,5 +1,6 @@
 'use client'
 
+import { FiltersContextProvider } from '@/contexts/Filters'
 import { HeaderFiltersContainer } from '../components/header-filters/HeaderFiltersContainer'
 import { styled } from 'styled-components'
 
@@ -13,7 +14,9 @@ const MainContainer = styled.main`
 export default function Home() {
   return (
     <MainContainer>
-      <HeaderFiltersContainer />
+      <FiltersContextProvider>
+        <HeaderFiltersContainer />
+      </FiltersContextProvider>
     </MainContainer>
   )
 }

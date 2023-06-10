@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { FiltersContext } from "@/contexts/Filters"
+import { useContext, useState } from "react"
 import { styled } from "styled-components"
 
 const FilterList = styled.ul`
@@ -9,15 +10,15 @@ const FilterList = styled.ul`
 `
 
 type itemListProps = {
-  isSelected: boolean
+  selected: boolean
 }
 
 const ItemList = styled.li<itemListProps>`
     text-transform: uppercase;
     list-style: none;
-    color: ${props => props.isSelected ? 'var(--text-dark)' : 'var(--text-dark)'};
-    font-weight: ${props => props.isSelected ? '600' : '400'};
-    border-bottom: ${props => props.isSelected ? '4px solid var(--orange-low)' : 'none'};
+    color: ${props => props.selected ? 'var(--text-dark)' : 'var(--text-dark)'};
+    font-weight: ${props => props.selected ? '600' : '400'};
+    border-bottom: ${props => props.selected ? '4px solid var(--orange-low)' : 'none'};
     cursor: pointer;
 `
 
@@ -28,16 +29,16 @@ const list = [
 ]
 
 export function FilterByCategory() {
-  const [selectedCategory, setSelectedCategory] = useState('')
-
+  const { categoryName, setCategoryName } = useContext(FiltersContext)
+  
   return (
     <FilterList>
       {
         list.map(category =>
           <ItemList
             key={category}
-            isSelected={selectedCategory === category}
-            onClick={() => setSelectedCategory(category)}
+            selected={categoryName === category}
+            onClick={() => setCategoryName(category)}
             >
             {category}
           </ItemList>
