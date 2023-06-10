@@ -1,5 +1,5 @@
 import { FiltersContext } from "@/contexts/Filters"
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { styled } from "styled-components"
 
 const FilterList = styled.ul`
