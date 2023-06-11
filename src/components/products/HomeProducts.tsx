@@ -1,8 +1,9 @@
 import { UseProduct } from "@/hooks/UseProduct"
 import ProductCard from "./ProductCard"
 import { styled } from "styled-components"
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { getAllProductsProps } from "@/types/GetAllProducts"
+import { FiltersContext } from "@/contexts/Filters"
 
 const ProductsContainer = styled.ul`
     display: grid;
@@ -16,9 +17,12 @@ const ProductsContainer = styled.ul`
 export function HomeProducts() {
   const [productList, setProductList] = useState([{}] as getAllProductsProps[])
   const data = UseProduct()
+  const { sort } = useContext(FiltersContext)
 
   data.then(product => setProductList(product))
 
+  useEffect(() => {}, [sort])
+  
   return (
     <ProductsContainer>
       { productList[0]?._id &&

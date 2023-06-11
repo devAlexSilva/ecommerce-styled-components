@@ -22,6 +22,10 @@ const ItemList = styled.li<itemListProps>`
     font-weight: ${props => props.selected ? '600' : '400'};
     border-bottom: ${props => props.selected ? '4px solid var(--orange-low)' : 'none'};
     cursor: pointer;
+ 
+    &:hover {
+      color: var(--orange-low);
+    }
 `
 
 export function FilterByCategory() {
@@ -30,25 +34,25 @@ export function FilterByCategory() {
 
   useEffect(() => {
     (async () => {
-     setList(await Api.getCategories())
+      setList(await Api.getCategories())
     })()
   }, [])
-  
+
   return (
-<>{console.log(list)}
-    <FilterList>
-      {
-        list.map((category, index) =>
-        <ItemList
-        key={index}
-            selected={categoryName?.title === category?.title}
-            onClick={() => setCategoryName(category)}
-          >
-            {category.title}
-          </ItemList>
-        )
-      }
-    </FilterList>
+    <>{console.log(list)}
+      <FilterList>
+        {
+          list.map((category, index) =>
+            <ItemList
+              key={index}
+              selected={categoryName?.title === category?.title}
+              onClick={() => setCategoryName(category)}
+            >
+              {category.title}
+            </ItemList>
+          )
+        }
+      </FilterList>
     </>
   )
 }

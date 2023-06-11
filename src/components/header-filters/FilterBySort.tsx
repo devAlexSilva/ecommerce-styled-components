@@ -2,6 +2,7 @@ import { styled } from 'styled-components'
 import { FilterOutline } from '@/icons/FilterOutline'
 import { useContext, useState } from 'react'
 import { FiltersContext } from '@/contexts/Filters'
+import { sortList } from '@/utils/sortList'
 
 
 const SortListContainer = styled.div`
@@ -23,6 +24,7 @@ const SortListOptions = styled.ul`
   top: 2rem;
   width: max-content;
   list-style: none;
+  z-index: 1;
 `
 const FilterBtn = styled.button`
   background: none;
@@ -49,12 +51,6 @@ const SortListItens = styled.li<LiProps>`
 export function FilterBySort() {
   const [isHidden, setIsHidden] = useState(true)
   const { sort, setSort } = useContext(FiltersContext)
-
-  const sortList = [
-    'Novidades',
-    'Maior Preço',
-    'Menor Preço'
-  ]
 
   const handleClickOpenSortList = () => {
     setIsHidden(!isHidden)

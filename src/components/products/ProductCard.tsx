@@ -10,7 +10,7 @@ const CardItem = styled.li`
   background-color: rgba(225, 225, 225, .4);
   backdrop-filter: blur(10px);
   border-radius: 8px;
-  width: 16rem;
+  width: 17rem;
 
   image {
     width: inherit;
