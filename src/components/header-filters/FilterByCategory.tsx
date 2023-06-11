@@ -1,5 +1,7 @@
+import { Api } from "@/api/sanity"
 import { FiltersContext } from "@/contexts/Filters"
-import { useContext } from "react"
+import { getCategoriesProps } from "@/types/GetCategories"
+import { useContext, useEffect, useState } from "react"
 import { styled } from "styled-components"
 
 const FilterList = styled.ul`
@@ -22,28 +24,31 @@ const ItemList = styled.li<itemListProps>`
     cursor: pointer;
 `
 
-const list = [
-  'roupas',
-  'acessorios',
-  'maquiagem',
-]
-
 export function FilterByCategory() {
   const { categoryName, setCategoryName } = useContext(FiltersContext)
+  const [list, setList] = useState([{}] as getCategoriesProps)
+
+  useEffect(() => {
+    (async () => {
+     setList(await Api.getCategories())
+    })()
+  }, [])
   
   return (
+<>{console.log(list)}
     <FilterList>
       {
-        list.map(category =>
-          <ItemList
-            key={category}
-            selected={categoryName === category}
+        list.map((category, index) =>
+        <ItemList
+        key={index}
+            selected={categoryName?.title === category?.title}
             onClick={() => setCategoryName(category)}
-            >
-            {category}
+          >
+            {category.title}
           </ItemList>
         )
       }
     </FilterList>
+    </>
   )
 }

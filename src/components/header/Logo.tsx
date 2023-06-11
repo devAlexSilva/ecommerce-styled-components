@@ -10,10 +10,11 @@ const LogoHeader = styled.a`
   color: var(--logo-color);
   font-weight: 400;
   font-size: 2.5rem;
+  text-decoration: none;
 `
 
 export function Logo() {
   return (
-    <LogoHeader className={saira_Stencil_One.className}>Logo</LogoHeader>
+    <LogoHeader href='/' className={saira_Stencil_One.className}>Logo</LogoHeader>
   )
 }

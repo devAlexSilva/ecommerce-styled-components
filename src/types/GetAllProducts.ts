@@ -5,5 +5,8 @@ export type getAllProductsProps = {
   mainImage: {
     alt: string
   },
-  categories: []
+  categories: {
+    ref: string,
+    title: string
+  }
 }

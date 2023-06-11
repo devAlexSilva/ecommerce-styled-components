@@ -1,10 +1,10 @@
-import { Api } from "@/api/sanity"
-import { getAllProductsProps } from "@/types/GetAllProducts"
-import { useEffect, useState } from "react"
+import { UseProduct } from "@/hooks/UseProduct"
 import ProductCard from "./ProductCard"
 import { styled } from "styled-components"
+import { useState } from "react"
+import { getAllProductsProps } from "@/types/GetAllProducts"
 
-  const ProductsContainer = styled.ul`
+const ProductsContainer = styled.ul`
     display: grid;
     grid-template-columns: repeat(auto-fill, 16rem);
     list-style: none;
@@ -14,25 +14,16 @@ import { styled } from "styled-components"
   `
 
 export function HomeProducts() {
-  const [productList, setProductList] = useState([] as getAllProductsProps[])
+  const [productList, setProductList] = useState([{}] as getAllProductsProps[])
+  const data = UseProduct()
 
-  const fetchDataProduct = async () => {
-    //  const data = await Api.getAllProducts()
-    //  setProductList(data)
-  }
-
-  useEffect(() => { fetchDataProduct() }, [])
+  data.then(product => setProductList(product))
 
   return (
-      <ProductsContainer>
-        {
-          productList[0]?._id &&
-          productList.map(product => <ProductCard key={product._id} {...product} />)
-        }
-        {
-          productList[0]?._id &&
-          productList.map(product => <ProductCard key={product._id} {...product} />)
-        }
-      </ProductsContainer>
+    <ProductsContainer>
+      { productList[0]?._id &&
+        productList.map(product => <ProductCard key={product._id} {...product} />)
+      }
+    </ProductsContainer>
   )
 }

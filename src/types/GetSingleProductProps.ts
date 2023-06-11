@@ -3,7 +3,7 @@ export type getSingleProductProps = {
   name: string,
   price: number,
   image:[]
-  categories: [],
+  categories: {},
   description: string,
   slug: string
 }
