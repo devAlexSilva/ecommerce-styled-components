@@ -1,8 +1,9 @@
 'use client'
 
+import { styled } from 'styled-components'
 import { FiltersContextProvider } from '@/contexts/Filters'
 import { HeaderFiltersContainer } from '../components/header-filters/HeaderFiltersContainer'
-import { styled } from 'styled-components'
+import { HomeProducts } from '@/components/products/HomeProducts'
 
 const MainContainer = styled.main`
   display: flex;
@@ -16,6 +17,7 @@ export default function Home() {
     <MainContainer>
       <FiltersContextProvider>
         <HeaderFiltersContainer />
+        <HomeProducts />
       </FiltersContextProvider>
     </MainContainer>
   )
