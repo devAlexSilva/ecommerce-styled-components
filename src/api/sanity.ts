@@ -18,12 +18,12 @@ export const Api = {
   },
 
   getAllProducts: async (): Promise<getAllProductsProps[]> => {
-    const query = '*[_type == "product"] {_id, name, price, categories}'
+    const query = '*[_type == "product"] {_id, name, price, categories, mainImage}'
     return await client.fetch(query)
   },
 
   getSingleProduct: async (id: string): Promise<getSingleProductProps> => {
-    const query = '*[_type == "product" && _id == $id] {_id, name, price, categories, description, slug.current}'
+    const query = '*[_type == "product" && _id == $id] {_id, name, price, categories, mainImage, image, description, slug}'
     const params = {id}
     return await client.fetch(query, params)
   }
