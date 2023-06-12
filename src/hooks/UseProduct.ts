@@ -4,7 +4,7 @@ import { Api } from "@/api/sanity"
 import { sortList } from "@/utils/sortList"
 
 export const UseProduct = async () => {
-  const { categoryName, sort } = useContext(FiltersContext)
+  const { categoryName, sort, search } = useContext(FiltersContext)
 
   const data = categoryName?._rev.length > 0
     ? await Api.getProductsByCategory(categoryName._id)
@@ -23,5 +23,10 @@ export const UseProduct = async () => {
     break;
   }
 
-  return data
+   const searchProduct = search.length > 0
+   ? data.filter(product => product.name.toLowerCase().includes(search.toLowerCase()))
+   : data
+
+  console.log(searchProduct)
+   return searchProduct
 }

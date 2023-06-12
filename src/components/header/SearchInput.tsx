@@ -1,16 +1,21 @@
 import { styled } from "styled-components"
 import { SearchIcon } from "../../icons/SearchIcon"
+import { useContext, useState } from "react"
+import { FiltersContext } from "@/contexts/Filters"
 
 
 const InputContainer = styled.div`
   width: 22rem;
   position: relative;
 
-  svg {
+  button {
     position: absolute;
     right: 1.25rem;
     top: 50%;
     transform: translateY(-50%);
+    background: none;
+    outline: none;
+    border: none;
     cursor: pointer;
   }
 `
@@ -28,10 +33,19 @@ const Input = styled.input`
 `
 
 export function SearchInput() {
+  const [value, setValue] = useState('')
+  const { setSearch } = useContext(FiltersContext)
+
+  const handleClickSearch = () => {
+    console.log(value)
+    setSearch(value)
+    setValue('')
+  }
+
   return (
     <InputContainer>
-      <Input placeholder="buscar" />
-      <SearchIcon />
+      <Input placeholder="buscar" value={value} onChange={(e) => setValue(e.target.value)}/>
+      <button onClick={handleClickSearch}><SearchIcon /></button>
     </InputContainer>
   )
 }

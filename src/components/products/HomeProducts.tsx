@@ -17,15 +17,15 @@ const ProductsContainer = styled.ul`
 export function HomeProducts() {
   const [productList, setProductList] = useState([{}] as getAllProductsProps[])
   const data = UseProduct()
-  const { sort } = useContext(FiltersContext)
+  const { sort, search, categoryName } = useContext(FiltersContext)
 
-  data.then(product => setProductList(product))
+  useEffect(() => {
+    data.then(product => setProductList(product))
+  }, [sort, search, categoryName])
 
-  useEffect(() => {}, [sort])
-  
   return (
     <ProductsContainer>
-      { productList[0]?._id &&
+      {productList[0]?._id &&
         productList.map(product => <ProductCard key={product._id} {...product} />)
       }
     </ProductsContainer>

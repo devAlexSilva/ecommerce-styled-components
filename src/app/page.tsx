@@ -1,7 +1,6 @@
 'use client'
 
 import { styled } from 'styled-components'
-import { FiltersContextProvider } from '@/contexts/Filters'
 import { HeaderFiltersContainer } from '../components/header-filters/HeaderFiltersContainer'
 import { HomeProducts } from '@/components/products/HomeProducts'
 
@@ -17,10 +16,8 @@ const MainContainer = styled.main`
 export default function Home() {
   return (
     <MainContainer>
-      <FiltersContextProvider>
-        <HeaderFiltersContainer />
-        <HomeProducts />
-      </FiltersContextProvider>
+      <HeaderFiltersContainer />
+      <HomeProducts />
     </MainContainer>
   )
 }
