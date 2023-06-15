@@ -8,7 +8,15 @@ const FilterList = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2.5rem;
+  gap: 1.5rem;
+  overflow-x: scroll;
+  margin-right: 1rem;
+
+  @media screen and (min-width: 425px) {
+    gap: 2.5;
+    margin-right: 2rem;
+    overflow-x: initial;
+  }
 `
 
 type itemListProps = {

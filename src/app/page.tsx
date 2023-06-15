@@ -9,8 +9,12 @@ const MainContainer = styled.main`
   flex-direction: column;
   align-items: center;
   min-height: calc(100vh - 6.4375rem); // total without header heigth
-  padding: 4rem;
+  padding: 2rem 1rem;
   background-color: var(--bg-primary);
+
+  @media screen and (min-width: 768px) {
+    padding: 4rem;
+  }
 `
 
 export default function Home() {

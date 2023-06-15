@@ -16,12 +16,12 @@ const ProductsContainer = styled.ul`
 
 export function HomeProducts() {
   const [productList, setProductList] = useState([{}] as getAllProductsProps[])
-  const data = UseProduct()
-  const { sort, search, categoryName } = useContext(FiltersContext)
+  // const data = UseProduct()
+  // const { sort, search, categoryName } = useContext(FiltersContext)
 
-  useEffect(() => {
-    data.then(product => setProductList(product))
-  }, [sort, search, categoryName])
+  // useEffect(() => {
+  //   data.then(product => setProductList(product))
+  // }, [sort, search, categoryName])
 
   return (
     <ProductsContainer>

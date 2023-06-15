@@ -14,6 +14,16 @@ const SortListContainer = styled.div`
   >label, button {
     cursor: pointer;
   }
+
+  label {
+    display: none;
+  }
+  
+  @media screen and (min-width: 425px) {
+    label {
+      display: initial;
+    }
+  }
 `
 
 const SortListOptions = styled.ul`
