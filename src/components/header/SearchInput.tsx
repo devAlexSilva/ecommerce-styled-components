@@ -5,8 +5,9 @@ import { FiltersContext } from "@/contexts/Filters"
 
 
 const InputContainer = styled.div`
-  width: 22rem;
+  width: 15rem;
   position: relative;
+  margin: 1rem auto 0;
 
   button {
     position: absolute;
@@ -17,6 +18,14 @@ const InputContainer = styled.div`
     outline: none;
     border: none;
     cursor: pointer;
+  }
+
+  @media screen and (min-width: 469px) {
+    width: 22rem;
+  }
+
+  @media screen and (min-width: 425px) {
+    margin-top: initial;
   }
 `
 
