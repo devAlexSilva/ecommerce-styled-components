@@ -1,5 +1,6 @@
 import { getAllProductsProps } from '@/types/GetAllProducts'
 import { urlForImage } from '@/utils/imageBuilder'
+import Link from 'next/link'
 import { styled } from 'styled-components'
 
 
@@ -43,12 +44,14 @@ const CardItem = styled.li`
   }
 `
 
-export default function ProductCard({ categories, mainImage, name, price }: getAllProductsProps) {
+export default function ProductCard({ categories, mainImage, name, price, _id }: getAllProductsProps) {
   return (
     <CardItem>
+      <Link href={`/product/?id=${_id}`}>
         <img src={`${urlForImage(mainImage).width(250).height(350)}`} alt={mainImage?.alt || name} />
+      </Link>
         <h3>{name.toLowerCase()}</h3>
-        <p>{price.toLocaleString('pt-br', {style: 'currency', currency: 'BRL', minimumFractionDigits: 2})}</p>
+        <p>{price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 })}</p>
     </CardItem>
   )
 }

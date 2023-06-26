@@ -12,16 +12,20 @@ const ProductsContainer = styled.ul`
     max-width: 100%;
     gap: 2rem;
     margin-top: 1rem;
+
+    @media screen and (min-width: 768px) {
+      
+    }
   `
 
 export function HomeProducts() {
   const [productList, setProductList] = useState([{}] as getAllProductsProps[])
-  // const data = UseProduct()
-  // const { sort, search, categoryName } = useContext(FiltersContext)
+  const data = UseProduct()
+  const { sort, search, categoryName } = useContext(FiltersContext)
 
-  // useEffect(() => {
-  //   data.then(product => setProductList(product))
-  // }, [sort, search, categoryName])
+  useEffect(() => {
+    data.then(product => setProductList(product))
+  }, [sort, search, categoryName])
 
   return (
     <ProductsContainer>
