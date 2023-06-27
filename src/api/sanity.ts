@@ -23,7 +23,7 @@ export const Api = {
     return await client.fetch(query)
   },
 
-  getSingleProduct: async (id: string): Promise<getSingleProductProps> => {
+  getSingleProduct: async (id: string): Promise<getSingleProductProps[]> => {
     const params = {id}
     const query = '*[_type == "product" && _id == $id] {_id, name, price, categories, mainImage, image, description, slug}'
     return await client.fetch(query, params)

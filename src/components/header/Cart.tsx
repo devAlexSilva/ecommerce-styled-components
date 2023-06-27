@@ -1,5 +1,5 @@
 import { UseLocalStorage } from "@/hooks/UseLocalStorage"
-import { CartIcon } from "@/icons/CartIcon"
+import { Bag } from "@/icons/Bag"
 import { styled } from "styled-components"
 
 const CartContainer = styled.div``
@@ -31,7 +31,7 @@ export function Cart() {
   return (
     <CartContainer>
       <CountContainer>
-        <CartIcon />
+        <Bag />
         {<CartCount>{value.length ?? '0'}</CartCount>}
       </CountContainer>
     </CartContainer>

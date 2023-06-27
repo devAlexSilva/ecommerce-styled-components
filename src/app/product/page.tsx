@@ -1,7 +1,12 @@
 'use client'
 
+import { Api } from "@/api/sanity"
 import { Home } from "@/icons/Home"
+import { useEffect, useState } from "react"
 import { styled } from "styled-components"
+import { getSingleProductProps } from "@/types/GetSingleProductProps"
+import { urlForImage } from "@/utils/imageBuilder"
+import { CartIcon } from "@/icons/CartIcon"
 
 
 const MainContainer = styled.main`
@@ -26,11 +31,64 @@ const ReturnContainer = styled.div`
     margin-right: .5rem;
   }
 
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 `
 const Wrapper = styled.section`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
+  place-self: center;
+  gap: 2rem;
+  
+  img {
+    max-width: 100%;
+  }
+  
+  
+  @media screen and (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+
+    img {
+      max-width: 96%;
+    }
+  }
+`
+
+const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  > div {
+    p {
+      margin: .5rem 0 4rem;
+    }
+  }
+`
+
+const BtnContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1rem;
+  max-width: 60%;
+  min-width: 15rem;
+  background-color: var(--orange-low);
+  border-radius: 50px;
+  cursor: pointer;
+  
+  button {
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: inherit;
+    cursor: inherit;
+}
+
+  &:hover {
+    background-color: var(--orange-low-hover);
+  }
 `
 
 type props = {
@@ -40,8 +98,18 @@ type props = {
 }
 
 export default function ProductDetailsPage({ searchParams: { id } }: props) {
+  const [product, setProduct] = useState({} as getSingleProductProps)
 
-  console.log(id)
+  const getProduct = async (id: string) => {
+    const data = await Api.getSingleProduct(id)
+    setProduct(data[0])
+    console.log(data)
+  }
+
+  useEffect(() => {
+    getProduct(id)
+  }, [])
+
   return (
     <MainContainer>
       <ReturnContainer>
@@ -50,27 +118,24 @@ export default function ProductDetailsPage({ searchParams: { id } }: props) {
           <span>voltar</span>
         </a>
       </ReturnContainer>
-      <Wrapper>
-        <div>imagem</div>
-        <div>
-          <div>
-            <p>caneca</p>
-            <h3>Caneca de Cerâmica rústica</h3>
-            <p>R$ 40.00</p>
-            <p>texto pequeno falando sobre algo como condições de venda por exemplo</p>
-            <h4>Descrição</h4>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Cupiditate labore quaerat quo similique accusantium
-              ab obcaecati eos saepe praesentium magni necessitatibus,
-              harum dolor voluptatibus natus optio animi consectetur delectus quis.
-            </p>
-          </div>
-          <div>
-            <button>Adicionar ao carrinho</button>
-          </div>
-        </div>
-      </Wrapper>
+      {product._id &&
+        <Wrapper>
+          <img src={`${urlForImage(product.image[0]).width(450).height(550)}`} alt={product.slug} />
+          <ContentContainer>
+            <div>
+              <h3>{product.name}</h3>
+              <p>{product.price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 })}</p>
+              <h4>Descrição</h4>
+              <p>{product.description}</p>
+            </div>
+
+            <BtnContainer>
+              <CartIcon />
+              <button>Adicionar ao carrinho</button>
+            </BtnContainer>
+          </ContentContainer>
+        </Wrapper>
+      }
     </MainContainer>
   )
 }
