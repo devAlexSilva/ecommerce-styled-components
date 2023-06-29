@@ -7,6 +7,7 @@ import { styled } from "styled-components"
 import { getSingleProductProps } from "@/types/GetSingleProductProps"
 import { urlForImage } from "@/utils/imageBuilder"
 import { CartIcon } from "@/icons/CartIcon"
+import { UseLocalStorage } from "@/hooks/UseLocalStorage"
 
 
 const MainContainer = styled.main`
@@ -97,6 +98,14 @@ type props = {
   }
 }
 
+type cartItemProps = {
+  _id: string,
+  name: string,
+  price: number,
+  image: [{}]
+}
+
+
 export default function ProductDetailsPage({ searchParams: { id } }: props) {
   const [product, setProduct] = useState({} as getSingleProductProps)
 
@@ -104,6 +113,29 @@ export default function ProductDetailsPage({ searchParams: { id } }: props) {
     const data = await Api.getSingleProduct(id)
     setProduct(data[0])
     console.log(data)
+  }
+
+  const handleAddToCart = () => {
+    const cartItems = localStorage.getItem('cart-item')
+
+    const newItem = [{...product, quantity: 1}]
+
+    if (cartItems) {
+      const cartItemsArray = JSON.parse(cartItems)
+
+      let existProductIndex = cartItemsArray.findIndex((item: { _id: string }) => item._id === product._id)
+
+      if (existProductIndex != -1) {
+        cartItemsArray[existProductIndex].quantity += 1
+      } else {
+        cartItemsArray.push(newItem)
+      }
+
+      localStorage.setItem('cart-item', JSON.stringify(cartItemsArray))
+    } else {
+      localStorage.setItem('cart-item', JSON.stringify(newItem))
+    }
+
   }
 
   useEffect(() => {
@@ -131,7 +163,7 @@ export default function ProductDetailsPage({ searchParams: { id } }: props) {
 
             <BtnContainer>
               <CartIcon />
-              <button>Adicionar ao carrinho</button>
+              <button onClick={handleAddToCart}>Adicionar ao carrinho</button>
             </BtnContainer>
           </ContentContainer>
         </Wrapper>

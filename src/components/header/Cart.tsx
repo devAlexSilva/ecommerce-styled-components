@@ -24,15 +24,14 @@ const CartCount = styled.span`
   `
 
 export function Cart() {
-  const { value, updateLocalStorage } = UseLocalStorage('cart-products', [{name: 'bolsa', price: 22}])
-  //const handleCart = (x: [{name: string, price: number}] ) => updateLocalStorage(x)
-
+  const { value } = UseLocalStorage('cart-products', [{}])
+  
   console.log(value)
   return (
     <CartContainer>
       <CountContainer>
         <Bag />
-        {<CartCount>{value.length ?? '0'}</CartCount>}
+        {<CartCount>{value.length > 1 ? value.length : '0'}</CartCount>}
       </CountContainer>
     </CartContainer>
   )
