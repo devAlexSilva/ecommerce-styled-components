@@ -1,13 +1,12 @@
 'use client'
 
 import { Api } from "@/api/sanity"
-import { Home } from "@/icons/Home"
 import { useEffect, useState } from "react"
 import { styled } from "styled-components"
 import { getSingleProductProps } from "@/types/GetSingleProductProps"
 import { urlForImage } from "@/utils/imageBuilder"
 import { CartIcon } from "@/icons/CartIcon"
-import { UseLocalStorage } from "@/hooks/UseLocalStorage"
+import { ReturnBtn } from '@/components/ReturnBtn'
 
 
 const MainContainer = styled.main`
@@ -22,18 +21,6 @@ const MainContainer = styled.main`
   }
 `
 
-const ReturnContainer = styled.div`
-  a {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-    }
-  svg {
-    margin-right: .5rem;
-  }
-
-  margin-bottom: 2rem;
-`
 const Wrapper = styled.section`
   display: grid;
   grid-template-columns: 1fr;
@@ -98,17 +85,10 @@ type props = {
   }
 }
 
-type cartItemProps = {
-  _id: string,
-  name: string,
-  price: number,
-  image: [{}]
-}
-
-
 export default function ProductDetailsPage({ searchParams: { id } }: props) {
   const [product, setProduct] = useState({} as getSingleProductProps)
-
+  const newItem = {...product, quantity: 1}
+  
   const getProduct = async (id: string) => {
     const data = await Api.getSingleProduct(id)
     setProduct(data[0])
@@ -117,8 +97,6 @@ export default function ProductDetailsPage({ searchParams: { id } }: props) {
 
   const handleAddToCart = () => {
     const cartItems = localStorage.getItem('cart-item')
-
-    const newItem = [{...product, quantity: 1}]
 
     if (cartItems) {
       const cartItemsArray = JSON.parse(cartItems)
@@ -133,7 +111,7 @@ export default function ProductDetailsPage({ searchParams: { id } }: props) {
 
       localStorage.setItem('cart-item', JSON.stringify(cartItemsArray))
     } else {
-      localStorage.setItem('cart-item', JSON.stringify(newItem))
+      localStorage.setItem('cart-item', JSON.stringify([newItem]))
     }
 
   }
@@ -144,12 +122,7 @@ export default function ProductDetailsPage({ searchParams: { id } }: props) {
 
   return (
     <MainContainer>
-      <ReturnContainer>
-        <a href="/">
-          <Home />
-          <span>voltar</span>
-        </a>
-      </ReturnContainer>
+      <ReturnBtn />
       {product._id &&
         <Wrapper>
           <img src={`${urlForImage(product.image[0]).width(450).height(550)}`} alt={product.slug} />

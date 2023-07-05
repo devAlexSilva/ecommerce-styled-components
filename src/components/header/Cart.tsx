@@ -1,12 +1,11 @@
 import { UseLocalStorage } from "@/hooks/UseLocalStorage"
 import { Bag } from "@/icons/Bag"
+import Link from "next/link"
 import { styled } from "styled-components"
 
-const CartContainer = styled.div``
-
-const CountContainer = styled.div`
-    position: relative;
-  `
+const CartContainer = styled.div`
+  position: relative;
+`
 
 const CartCount = styled.span`
     position: absolute;
@@ -24,15 +23,14 @@ const CartCount = styled.span`
   `
 
 export function Cart() {
-  const { value } = UseLocalStorage('cart-products', [{}])
-  
-  console.log(value)
+  const { value } = UseLocalStorage('cart-item',[{_id: null}])
+
   return (
     <CartContainer>
-      <CountContainer>
+      <Link href='/cart'>
         <Bag />
-        {<CartCount>{value.length > 1 ? value.length : '0'}</CartCount>}
-      </CountContainer>
+        {<CartCount>{value[0]._id !== null ? value.length : '0'}</CartCount>}
+      </Link>
     </CartContainer>
   )
 }
