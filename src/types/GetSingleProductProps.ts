@@ -7,3 +7,7 @@ export type getSingleProductProps = {
   description: string,
   slug: string
 }
+
+export interface getProductPropsToCart extends getSingleProductProps {
+  quantity: number
+}
