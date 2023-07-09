@@ -2,6 +2,7 @@
 
 import { getProductPropsToCart } from "@/types/GetSingleProductProps"
 import { urlForImage } from "@/utils/imageBuilder"
+import { ChangeEvent } from "react"
 import { styled } from "styled-components"
 
 const Item = styled.li`
@@ -48,9 +49,7 @@ const Description = styled.div`
       display: flex;
       justify-content: space-between;
 
-      select {
-
-      }
+      select {}
       
       span {
         font-weight: 600;
@@ -59,8 +58,18 @@ const Description = styled.div`
       }
     }
   `
+interface ICartItem {
+  product: getProductPropsToCart
+  handleUpdateQuantity: (newQuantity: number, id: string) => void
+}
 
-export function CartItem(product: getProductPropsToCart) {
+export function CartItem({ product, handleUpdateQuantity }: ICartItem) {
+
+  const handleSelectedQuantity = (event: ChangeEvent<HTMLSelectElement>, id: string) => {
+    const newQuantity = Number(event.target.value)
+    handleUpdateQuantity(newQuantity, id)
+  }
+
   return (
     <Item>
       <img src={`${urlForImage(product.image[0])}`} alt={product.name} />
@@ -70,7 +79,13 @@ export function CartItem(product: getProductPropsToCart) {
           <p>{product.description}</p>
         </div>
         <div>
-          <select>{product.quantity}</select>
+          <select value={product.quantity} onChange={(event) => handleSelectedQuantity(event, product._id)}>
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+            <option value={5}>5</option>
+          </select>
           <span>{product.price}</span>
         </div>
       </Description>

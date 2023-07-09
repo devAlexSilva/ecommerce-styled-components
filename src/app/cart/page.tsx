@@ -45,11 +45,21 @@ const CartList = styled.ul`
 `
 
 export default function CartPage() {
-  const { value } = UseLocalStorage<getProductPropsToCart[]>('cart-item', [])
-  
-    const totalPrice = value.map(item => (item.price * item.quantity))
-    const sumValue = () => totalPrice.reduce((a, b) => a + b, 0)
-  
+  const { value, updateLocalStorage } = UseLocalStorage<getProductPropsToCart[]>('cart-item', [])
+
+  const totalPrice = value.map(item => (item.price * item.quantity))
+  const sumValue = () => totalPrice.reduce((a, b) => a + b, 0)
+
+  const handleUpdateQuantity = (newQuantity: number, id: string) => {
+    const newValue = value.map(item => {
+      if(item._id !== id) return item
+      
+      return {...item, quantity: newQuantity}
+    })
+
+    updateLocalStorage(newValue)
+  }
+
   return (
     <MainContainer>
       <Container>
@@ -62,7 +72,7 @@ export default function CartPage() {
           </p>
           <CartList>
             {
-              value.map(item => <CartItem key={item._id} {...item}/>)
+              value.map(item => <CartItem key={item._id} product={item} handleUpdateQuantity={handleUpdateQuantity} />)
             }
           </CartList>
         </CartListContainer>
