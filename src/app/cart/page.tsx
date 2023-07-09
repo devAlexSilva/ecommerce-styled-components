@@ -5,6 +5,7 @@ import { ReturnBtn } from '@/components/ReturnBtn'
 import { UseLocalStorage } from '@/hooks/UseLocalStorage'
 import { getProductPropsToCart } from '@/types/GetSingleProductProps'
 import { CartItem } from '@/components/cart/CartItem'
+import { formatPrice } from '@/utils/formatPrice'
 
 
 const MainContainer = styled.main`
@@ -47,8 +48,10 @@ const CartList = styled.ul`
 export default function CartPage() {
   const { value, updateLocalStorage } = UseLocalStorage<getProductPropsToCart[]>('cart-item', [])
 
-  const totalPrice = value.map(item => (item.price * item.quantity))
-  const sumValue = () => totalPrice.reduce((a, b) => a + b, 0)
+  const totalPriceArray = value.map(item => (item.price * item.quantity))
+  const sumValue = () => totalPriceArray.reduce((a, b) => a + b, 0)
+  const totalPriceFormated = formatPrice(sumValue())
+  
 
   const handleUpdateQuantity = (newQuantity: number, id: string) => {
     const newValue = value.map(item => {
@@ -68,7 +71,7 @@ export default function CartPage() {
           <h3>Seu Carrinho</h3>
           <p>
             Total ({value.length} Produtos)
-            <span> R${sumValue()}</span>
+            <span> {totalPriceFormated}</span>
           </p>
           <CartList>
             {

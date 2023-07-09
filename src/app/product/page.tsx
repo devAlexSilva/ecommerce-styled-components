@@ -7,6 +7,7 @@ import { getSingleProductProps } from "@/types/GetSingleProductProps"
 import { urlForImage } from "@/utils/imageBuilder"
 import { CartIcon } from "@/icons/CartIcon"
 import { ReturnBtn } from '@/components/ReturnBtn'
+import { formatPrice } from "@/utils/formatPrice"
 
 
 const MainContainer = styled.main`
@@ -129,7 +130,7 @@ export default function ProductDetailsPage({ searchParams: { id } }: props) {
           <ContentContainer>
             <div>
               <h3>{product.name}</h3>
-              <p>{product.price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 })}</p>
+              <p>{formatPrice(product.price)}</p>
               <h4>Descrição</h4>
               <p>{product.description}</p>
             </div>
