@@ -1,6 +1,7 @@
 import { getAllProductsProps } from '@/types/GetAllProducts'
 import { formatPrice } from '@/utils/formatPrice'
 import { urlForImage } from '@/utils/imageBuilder'
+import Image from 'next/image'
 import Link from 'next/link'
 import { styled } from 'styled-components'
 
@@ -14,8 +15,8 @@ const CardItem = styled.li`
   border-radius: 8px;
   width: 17rem;
 
-  image {
-    width: inherit;
+  a, img {
+    width: 100%;
     height: 18.75rem;
   }
 
@@ -49,7 +50,7 @@ export default function ProductCard({ categories, mainImage, name, price, _id }:
   return (
     <CardItem>
       <Link href={`/product/?id=${_id}`}>
-        <img src={`${urlForImage(mainImage).width(250).height(350)}`} alt={mainImage?.alt || name} />
+        <Image src={`${urlForImage(mainImage)}`} priority quality={100} width={250} height={350} alt={mainImage?.alt || name} />
       </Link>
         <h3>{name.toLowerCase()}</h3>
         <p>{formatPrice(price)}</p>

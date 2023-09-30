@@ -2,6 +2,7 @@
 
 import { getProductPropsToCart } from "@/types/GetSingleProductProps"
 import { urlForImage } from "@/utils/imageBuilder"
+import Image from "next/image"
 import { ChangeEvent } from "react"
 import { styled } from "styled-components"
 
@@ -72,7 +73,7 @@ export function CartItem({ product, handleUpdateQuantity }: ICartItem) {
 
   return (
     <Item>
-      <img src={`${urlForImage(product.image[0])}`} alt={product.name} />
+      <Image src={`${urlForImage(product.image[0])}`} width={250} height={250} alt={product.name} />
       <Description>
         <div>
           <h4>{product.name}</h4>

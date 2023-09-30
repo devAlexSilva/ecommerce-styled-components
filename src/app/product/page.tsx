@@ -8,6 +8,7 @@ import { urlForImage } from "@/utils/imageBuilder"
 import { CartIcon } from "@/icons/CartIcon"
 import { ReturnBtn } from '@/components/ReturnBtn'
 import { formatPrice } from "@/utils/formatPrice"
+import Image from "next/image"
 
 
 const MainContainer = styled.main`
@@ -30,6 +31,7 @@ const Wrapper = styled.section`
   
   img {
     max-width: 100%;
+    height: auto;
   }
   
   
@@ -39,6 +41,7 @@ const Wrapper = styled.section`
 
     img {
       max-width: 96%;
+      min-height: 28rem;
     }
   }
 `
@@ -119,14 +122,14 @@ export default function ProductDetailsPage({ searchParams: { id } }: props) {
 
   useEffect(() => {
     getProduct(id)
-  }, [])
+  }, [id])
 
   return (
     <MainContainer>
       <ReturnBtn />
       {product._id &&
         <Wrapper>
-          <img src={`${urlForImage(product.image[0]).width(450).height(550)}`} alt={product.slug} />
+          <Image src={`${urlForImage(product.image[0])}`} priority width={450} height={550} alt={product.slug} />
           <ContentContainer>
             <div>
               <h3>{product.name}</h3>
