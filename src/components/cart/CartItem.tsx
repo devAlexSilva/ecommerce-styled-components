@@ -1,5 +1,6 @@
 'use client'
 
+import { RemoveCartItem } from './RemoveCartItem'
 import { getProductPropsToCart } from "@/types/GetSingleProductProps"
 import { urlForImage } from "@/utils/imageBuilder"
 import Image from "next/image"
@@ -10,7 +11,7 @@ const Item = styled.li`
   display: flex;
   align-items: center;
   height: 13.25rem;
-
+  position: relative;
   border-radius: 8px;
   background-color: #FFF;
   margin: 1rem 0;
@@ -19,6 +20,12 @@ const Item = styled.li`
     height: 100%;
     min-width: 16rem;
     border-radius: 8px 0 0 8px;
+  }
+
+  svg {
+    position: absolute;
+    right: .5rem;
+    top: .5rem;
   }
 
   `
@@ -62,9 +69,10 @@ const Description = styled.div`
 interface ICartItem {
   product: getProductPropsToCart
   handleUpdateQuantity: (newQuantity: number, id: string) => void
+  handleRemoveItem: (id: string) => void
 }
 
-export function CartItem({ product, handleUpdateQuantity }: ICartItem) {
+export function CartItem({ product, handleUpdateQuantity, handleRemoveItem }: ICartItem) {
 
   const handleSelectedQuantity = (event: ChangeEvent<HTMLSelectElement>, id: string) => {
     const newQuantity = Number(event.target.value)
@@ -74,6 +82,7 @@ export function CartItem({ product, handleUpdateQuantity }: ICartItem) {
   return (
     <Item>
       <Image src={`${urlForImage(product.image[0])}`} width={250} height={250} alt={product.name} />
+      <RemoveCartItem id={product._id} handleRemoveItem={handleRemoveItem} />
       <Description>
         <div>
           <h4>{product.name}</h4>

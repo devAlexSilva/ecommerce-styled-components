@@ -7,7 +7,6 @@ import { getProductPropsToCart } from '@/types/GetSingleProductProps'
 import { CartItem } from '@/components/cart/CartItem'
 import { formatPrice } from '@/utils/formatPrice'
 
-
 const MainContainer = styled.main`
   display: flex;
   flex-direction: column;
@@ -51,15 +50,17 @@ export default function CartPage() {
   const totalPriceArray = value.map(item => (item.price * item.quantity))
   const sumValue = () => totalPriceArray.reduce((a, b) => a + b, 0)
   const totalPriceFormated = formatPrice(sumValue())
-  
 
   const handleUpdateQuantity = (newQuantity: number, id: string) => {
     const newValue = value.map(item => {
-      if(item._id !== id) return item
-      
-      return {...item, quantity: newQuantity}
+      if (item._id !== id) return item
+      return { ...item, quantity: newQuantity }
     })
 
+    updateLocalStorage(newValue)
+  }
+  const handleRemoveItem = (id: string) => {
+    const newValue = value.filter((item) => item._id !== id)
     updateLocalStorage(newValue)
   }
 
@@ -75,7 +76,13 @@ export default function CartPage() {
           </p>
           <CartList>
             {
-              value.map(item => <CartItem key={item._id} product={item} handleUpdateQuantity={handleUpdateQuantity} />)
+              value.map(item =>
+                <CartItem
+                  key={item._id}
+                  product={item}
+                  handleUpdateQuantity={handleUpdateQuantity}
+                  handleRemoveItem={handleRemoveItem}
+                />)
             }
           </CartList>
         </CartListContainer>
