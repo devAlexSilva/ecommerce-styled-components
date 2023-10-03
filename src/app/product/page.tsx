@@ -19,7 +19,7 @@ const MainContainer = styled.main`
   background-color: var(--bg-primary);
 
   @media screen and (min-width: 768px) {
-    padding: 4rem;
+    padding: 4rem 1rem;
   }
 `
 
@@ -29,16 +29,12 @@ const Wrapper = styled.section`
   place-self: center;
   gap: 2rem;
   
-  img {
-    max-width: 100%;
-    height: auto;
-  }
+
   
   
   @media screen and (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0;
-
+    
     img {
       max-width: 96%;
       min-height: 28rem;

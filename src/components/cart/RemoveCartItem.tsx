@@ -3,7 +3,6 @@
 import { TrashIcon } from '@/icons/trash'
 import styled from 'styled-components'
 
-
 const Btn = styled.button`
   cursor: pointer;
 
@@ -11,8 +10,6 @@ const Btn = styled.button`
     fill: var(--red-color);
   }
 `
-
-
 
 type item = {
   id: string

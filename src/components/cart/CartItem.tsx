@@ -56,8 +56,6 @@ const Description = styled.div`
     > div + div {
       display: flex;
       justify-content: space-between;
-
-      select {}
       
       span {
         font-weight: 600;

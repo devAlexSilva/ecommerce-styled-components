@@ -71,7 +71,7 @@ export default function CartPage() {
         <CartListContainer>
           <h3>Seu Carrinho</h3>
           <p>
-            Total ({value.length} Produtos)
+            Total ({value.length} {value.length > 1 ? 'Produtos' : 'Produto'})
             <span> {totalPriceFormated}</span>
           </p>
           <CartList>
