@@ -4,13 +4,14 @@ import { HeaderContainer } from '@/components/header/HeaderContainer'
 import './globals.css'
 import { Saira } from 'next/font/google'
 import { FiltersContextProvider } from '@/contexts/Filters'
+import { Metadata } from 'next'
 
 const saira = Saira({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600']
 })
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Geass Store',
   description: 'Lojinha Virtual de variedades',
 }
