@@ -78,19 +78,38 @@ const CartResume = styled.section`
     font-size: 1rem;
     font-weight: 400;
   }
-
  }
 
- div:last-child {
+ div:nth-child(4) {
   margin-top: 2rem;
   border-top: 2px solid var(--orange-low);
   width: 100%;
+
+  p {
+    font-weight: 600;
+  }
 }
+
+@media screen and (max-width: 425px) {
+    padding: 1rem .5rem;
+    min-width: initial;
+  }
+`
+
+const BuyBtn = styled.button`
+  padding: .75rem;
+  margin-top: 2.5rem;
+  width: 100%;
+  border-radius: .2rem;
+  border: none;
+  color: #fff;
+  background-color: var(--green-success);
+  cursor: pointer;
 `
 
 export default function CartPage() {
   const { value, updateLocalStorage } = UseLocalStorage<getProductPropsToCart[]>('cart-item', [])
-  
+
   let freightValue = 40
   const totalPriceArray = value.map(item => (item.price * item.quantity))
   const sumValue = () => totalPriceArray.reduce((a, b) => a + b, 0)
@@ -128,15 +147,6 @@ export default function CartPage() {
                 handleRemoveItem={handleRemoveItem}
               />)
           }
-          {
-            value.map(item =>
-              <CartItem
-                key={item._id}
-                product={item}
-                handleUpdateQuantity={handleUpdateQuantity}
-                handleRemoveItem={handleRemoveItem}
-              />)
-          }
         </CartList>
         <CartResume>
           <h3>RESUMO DO PEDIDO</h3>
@@ -150,8 +160,9 @@ export default function CartPage() {
           </div>
           <div>
             <p>Total</p>
-            <p>{formatPrice(sumValue()+freightValue)}</p>
+            <p>{formatPrice(sumValue() + freightValue)}</p>
           </div>
+          <BuyBtn>COMPRAR AGORA</BuyBtn>
         </CartResume>
       </Container>
     </MainContainer>
