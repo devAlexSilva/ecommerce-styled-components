@@ -1,5 +1,6 @@
 'use client'
 
+import { formatPrice } from '@/utils/formatPrice'
 import { RemoveCartItem } from './RemoveCartItem'
 import { getProductPropsToCart } from "@/types/GetSingleProductProps"
 import { urlForImage } from "@/utils/imageBuilder"
@@ -18,7 +19,9 @@ const Item = styled.li`
 
   img {
     height: 100%;
-    min-width: 16rem;
+    width: 60%;
+    min-width: 3rem;
+    max-width: 15.6rem;
     border-radius: 8px 0 0 8px;
   }
 
@@ -26,6 +29,20 @@ const Item = styled.li`
     position: absolute;
     right: .5rem;
     top: .5rem;
+  }
+
+  @media screen and (max-width: 425px) {
+    flex-direction: column;
+    height: auto;
+    align-items: start;
+
+    svg {
+      right: 0;
+    }
+    img {
+      height: 15rem;
+      width: 80%;
+    }
   }
 
   `
@@ -45,7 +62,7 @@ const Description = styled.div`
     }
     > div p {
       font-weight: 400;
-      font-size: .75rem;
+      font-size: .9rem;
 
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -59,8 +76,15 @@ const Description = styled.div`
       
       span {
         font-weight: 600;
-        font-size: .75rem;
+        font-size: .9rem;
         color: var(--color-dark);
+      }
+    }
+
+    @media screen and (max-width: 425px) {
+      padding: 0 .5rem .5rem;
+      > * {
+        margin-top: 1rem;
       }
     }
   `
@@ -94,7 +118,7 @@ export function CartItem({ product, handleUpdateQuantity, handleRemoveItem }: IC
             <option value={4}>4</option>
             <option value={5}>5</option>
           </select>
-          <span>{product.price}</span>
+          <span>{formatPrice(product.price)}</span>
         </div>
       </Description>
     </Item>
