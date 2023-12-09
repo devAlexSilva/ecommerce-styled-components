@@ -3,6 +3,7 @@
 import { styled } from 'styled-components'
 import { HeaderFiltersContainer } from '../components/header-filters/HeaderFiltersContainer'
 import { HomeProducts } from '@/components/products/HomeProducts'
+import { Metadata } from 'next'
 
 const MainContainer = styled.main`
   display: flex;
@@ -16,6 +17,10 @@ const MainContainer = styled.main`
     padding: 4rem;
   }
 `
+
+export const metadata: Metadata = {
+  title: 'Geass Store - home'
+}
 
 export default function Home() {
   return (
