@@ -37,7 +37,7 @@ export function Cart() {
   return (
     <CartContainer onClick={navigateToCart}>
       <Bag />
-      {<CartCount>{value[0]._id !== null ? value.length : '0'}</CartCount>}
+      {<CartCount>{value[0]?._id !== null ? value.length : '0'}</CartCount>}
     </CartContainer>
   )
 }
