@@ -1,3 +1,4 @@
+'use client'
 import { styled } from "styled-components"
 import { SearchIcon } from "../../icons/SearchIcon"
 import { useContext, useState } from "react"
@@ -46,7 +47,6 @@ export function SearchInput() {
   const { setSearch } = useContext(FiltersContext)
 
   const handleClickSearch = () => {
-    console.log(value)
     setSearch(value)
     setValue('')
   }

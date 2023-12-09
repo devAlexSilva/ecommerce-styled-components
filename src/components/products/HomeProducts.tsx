@@ -1,3 +1,4 @@
+'use client'
 import { UseProduct } from "@/hooks/UseProduct"
 import ProductCard from "./ProductCard"
 import { styled } from "styled-components"

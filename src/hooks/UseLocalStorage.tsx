@@ -1,7 +1,5 @@
 'use client'
-
 import { useEffect, useState } from "react";
-
 
 export function UseLocalStorage<T>(item: string, initialValue: T) {
   const [value, setValue] = useState(initialValue)

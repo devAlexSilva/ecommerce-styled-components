@@ -1,3 +1,4 @@
+'use client'
 import { Api } from "@/api/sanity"
 import { FiltersContext } from "@/contexts/Filters"
 import { getCategoriesProps } from "@/types/GetCategories"

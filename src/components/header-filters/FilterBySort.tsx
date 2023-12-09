@@ -1,3 +1,4 @@
+'use client'
 import { styled } from 'styled-components'
 import { FilterOutline } from '@/icons/FilterOutline'
 import { useContext, useState } from 'react'

@@ -1,5 +1,4 @@
 'use client'
-
 import { Api } from "@/api/sanity"
 import { useEffect, useState } from "react"
 import { styled } from "styled-components"
