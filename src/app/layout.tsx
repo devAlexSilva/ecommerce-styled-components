@@ -1,6 +1,6 @@
 'use client'
-import { HeaderContainer } from '@/components/header/HeaderContainer'
 import './globals.css'
+import { HeaderContainer } from '@/components/header/HeaderContainer'
 import { Saira } from 'next/font/google'
 import { FiltersContextProvider } from '@/contexts/Filters'
 
